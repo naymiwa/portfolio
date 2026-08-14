@@ -10,4 +10,4 @@ tags: ['HTML', 'CSS', 'JavaScript', 'Responsive']
 demoUrl: 'https://space-web-naylargia.netlify.app/'
 ---
 
-Built a responsive, **astronomy-themed website** using HTML, CSS, and JavaScript — featuring an interactive and user-friendly design. It combines my love for space with front-end development.
+Built a responsive, **astronomy-themed website** using HTML, CSS, and JavaScript, featuring an interactive and user-friendly design. It combines my love for space with front-end development.

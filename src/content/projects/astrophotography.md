@@ -1,6 +1,6 @@
 ---
 title: 'Astrophotography'
-description: 'Combining a childhood love of photography with astronomy — capturing images of celestial objects during the nighttime.'
+description: 'Combining a childhood love of photography with astronomy, capturing images of celestial objects during the nighttime.'
 category: 'Creative'
 date: '2022'
 order: 50

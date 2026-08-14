@@ -6,7 +6,7 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.enum(['Web', 'UI/UX', 'Hardware', 'Creative']),
-    date: z.string(), // e.g. "2024" — used for ordering (desc)
+    date: z.string(), // e.g. "2024", used for ordering (desc)
     order: z.number().optional(),
     cover: z.string().optional(),
     tags: z.array(z.string()).default([]),

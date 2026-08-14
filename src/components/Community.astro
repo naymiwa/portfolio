@@ -10,6 +10,8 @@ const rendered = await Promise.all(
   items.map(async (e) => ({ data: e.data, Content: (await e.render()).Content }))
 );
 
+const iconThemes = ['bg-brand-500 text-white', 'bg-coral-500 text-white', 'bg-sand-400 text-ink'];
+
 const kindColor: Record<string, string> = {
   Community: 'bg-brand-50 text-brand-600 border-brand-100',
   Event: 'bg-coral-50 text-coral-600 border-coral-100',
@@ -29,7 +31,7 @@ const kindColor: Record<string, string> = {
       {rendered.map(({ data, Content }, i) => (
         <article data-reveal style={`--reveal-delay:${(i % 3) * 80}ms`} class="card group flex flex-col p-6 hover:-translate-y-1 hover:shadow-card-hover">
           <div class="flex items-center justify-between">
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600">
+            <span class={`grid h-11 w-11 place-items-center rounded-xl ${iconThemes[i % 3]}`}>
               <Icon name="users" class="h-5 w-5" />
             </span>
             <span class:list={['rounded-full border px-2.5 py-1 text-[11px] font-semibold', kindColor[data.kind]]}>

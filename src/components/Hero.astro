@@ -13,22 +13,22 @@ const socialList = [
 const parts = site.tagline.split(site.heroHighlight);
 ---
 <section id="home" class="relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28">
-  <!-- Decorative brand blobs -->
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+  <!-- Decorative brand blobs + bold solid shapes -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
     <div class="absolute -left-24 top-10 h-80 w-80 rounded-full bg-brand-300/40 blur-3xl animate-blob-drift"></div>
     <div class="absolute right-0 top-32 h-72 w-72 rounded-full bg-coral-300/30 blur-3xl animate-blob-drift" style="animation-delay:-6s"></div>
     <div class="absolute left-1/3 -bottom-10 h-72 w-72 rounded-full bg-sand-300/40 blur-3xl animate-blob-drift" style="animation-delay:-11s"></div>
+    <!-- solid color accents -->
+    <div class="absolute left-[8%] top-40 h-16 w-16 rounded-2xl bg-coral-500 rotate-12 animate-float opacity-90"></div>
+    <div class="absolute right-[10%] top-24 h-14 w-14 rounded-full bg-sand-400 animate-float opacity-95" style="animation-delay:-3s"></div>
+    <div class="absolute right-[16%] bottom-24 h-12 w-12 rounded-lg bg-brand-500 -rotate-12 animate-float" style="animation-delay:-5s"></div>
+    <div class="absolute left-[14%] bottom-16 h-9 w-9 rounded-full bg-brand-500 animate-float" style="animation-delay:-2s"></div>
     <div class="absolute inset-0 grain opacity-[0.35]"></div>
   </div>
 
   <div class="container-content">
     <div class="mx-auto max-w-3xl text-center">
-      <span data-reveal class="chip !border-brand-200 !bg-brand-50 !text-brand-600">
-        <span class="mr-1.5 inline-block h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-        Available for internships & collaborations
-      </span>
-
-      <h1 data-reveal style="--reveal-delay:80ms" class="mt-6 text-4xl font-bold leading-[1.05] text-ink sm:text-6xl md:text-7xl text-balance">
+      <h1 data-reveal style="--reveal-delay:80ms" class="text-4xl font-bold leading-[1.05] text-ink sm:text-6xl md:text-7xl text-balance">
         {site.name}
       </h1>
 
@@ -67,14 +67,22 @@ const parts = site.tagline.split(site.heroHighlight);
       )}
     </div>
 
-    <!-- Stats -->
+    <!-- Stats (solid blue / red / yellow blocks) -->
     <div data-reveal style="--reveal-delay:420ms" class="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-4">
-      {site.stats.map((s) => (
-        <div class="card px-4 py-5 text-center">
-          <div class="font-display text-2xl font-bold text-brand-600 sm:text-3xl">{s.value}</div>
-          <div class="mt-1 text-xs text-ink-muted sm:text-sm">{s.label}</div>
-        </div>
-      ))}
+      {site.stats.map((s, i) => {
+        const styles = [
+          'bg-brand-500 text-white',
+          'bg-coral-500 text-white',
+          'bg-sand-400 text-ink',
+        ];
+        const style = styles[i % 3];
+        return (
+          <div class={`rounded-2xl px-4 py-6 text-center shadow-card transition-transform duration-300 hover:-translate-y-1 ${style}`}>
+            <div class="font-display text-3xl font-bold sm:text-4xl">{s.value}</div>
+            <div class="mt-1 text-xs font-medium sm:text-sm opacity-90">{s.label}</div>
+          </div>
+        );
+      })}
     </div>
 
     <a href="#about" class="mx-auto mt-16 flex w-max flex-col items-center gap-2 text-ink-faint" aria-label="Scroll down">

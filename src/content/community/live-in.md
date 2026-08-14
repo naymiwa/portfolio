@@ -6,4 +6,4 @@ date: 'Various'
 order: 10
 ---
 
-Immersive **live-in experiences** (Hanjeli, Tanoker, Pakedjen) and a **backpacking trip across Malaysia** — including a food-sharing social initiative — that broadened my perspective, empathy, and independence.
+Immersive **live-in experiences** (Hanjeli, Tanoker, Pakedjen) and a **backpacking trip across Malaysia**, including a food-sharing social initiative, that broadened my perspective, empathy, and independence.

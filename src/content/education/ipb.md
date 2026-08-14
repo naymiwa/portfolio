@@ -1,7 +1,7 @@
 ---
 school: 'IPB University'
 program: 'Software Engineering Technology'
-date: '2024 — Present'
+date: '2024 - Present'
 order: 20
 location: 'Bogor, Indonesia'
 ---

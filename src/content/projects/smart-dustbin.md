@@ -1,6 +1,6 @@
 ---
 title: 'Smart Dustbin'
-description: 'Transformed a regular trash bin into an automatic, sensor-driven one using Arduino — the lid opens automatically when an object is detected within ~10 cm.'
+description: 'Transformed a regular trash bin into an automatic, sensor-driven one using Arduino, the lid opens automatically when an object is detected within ~10 cm.'
 category: 'Hardware'
 date: '2022'
 order: 70

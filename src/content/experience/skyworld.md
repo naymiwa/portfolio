@@ -6,4 +6,4 @@ order: 20
 location: 'Jakarta, Indonesia'
 ---
 
-Guided and moderated planetarium sessions at SkyWorld TMII — sharing astronomy knowledge with visitors and making the wonders of space accessible and exciting.
+Guided and moderated planetarium sessions at SkyWorld TMII, sharing astronomy knowledge with visitors and making the wonders of space accessible and exciting.

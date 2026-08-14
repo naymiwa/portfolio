@@ -2,7 +2,7 @@
 //  EDIT YOUR PORTFOLIO HERE
 //  This file holds the "one-off" content (hero, about, skills,
 //  contact, socials). Projects / experience / education / etc.
-//  live as individual files in src/content/* — add a file there
+//  live as individual files in src/content/*, add a file there
 //  and it shows up automatically.
 // ─────────────────────────────────────────────────────────────
 
@@ -17,7 +17,7 @@ export const site = {
   cv: '/Portfolio-Nayla-Aqila-Argia.pdf',
 
   // Short hero tagline (supports the highlighted word via {highlight}).
-  tagline: 'I build impactful digital experiences — where technology, design, and a love for astronomy meet.',
+  tagline: 'I build impactful digital experiences, where technology, design, and a love for astronomy meet.',
   heroHighlight: 'astronomy',
 
   quote: {
@@ -27,10 +27,10 @@ export const site = {
 
   about: {
     intro:
-      "Hi, I'm Nayla Aqila Argia — passionate about technology, machine learning, and astronomy.",
+      "Hi, I'm Nayla Aqila Argia, passionate about technology, machine learning, and astronomy.",
     body: [
       'Currently pursuing a degree in Software Engineering Technology at IPB University, I am driven by curiosity and a desire to create impactful digital experiences through continuous learning and collaboration.',
-      'I love combining what I learn with what I am curious about — from building responsive websites and designing intuitive interfaces, to tinkering with robotics and capturing the night sky through astrophotography.',
+      'I love combining what I learn with what I am curious about, from building responsive websites and designing intuitive interfaces, to tinkering with robotics and capturing the night sky through astrophotography.',
     ],
     facts: [
       { label: 'University', value: 'IPB University' },

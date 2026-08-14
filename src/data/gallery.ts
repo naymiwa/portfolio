@@ -1,4 +1,4 @@
-// Gallery photos — add an entry and it appears in the Gallery section.
+// Gallery photos, add an entry and it appears in the Gallery section.
 // Put image files in /public/images/gallery/  (any tile whose image is
 // missing simply hides itself, so it's safe to leave placeholders.)
 export const gallery = [

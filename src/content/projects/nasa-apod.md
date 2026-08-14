@@ -1,6 +1,6 @@
 ---
 title: 'NASA APOD Website'
-description: 'Redesigned and developed a responsive Astronomy Picture of the Day site powered by the NASA APOD API — fetching and displaying real-time astronomical content.'
+description: 'Redesigned and developed a responsive Astronomy Picture of the Day site powered by the NASA APOD API, fetching and displaying real-time astronomical content.'
 category: 'Web'
 date: '2024'
 order: 100

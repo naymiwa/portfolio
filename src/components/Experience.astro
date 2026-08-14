@@ -10,6 +10,8 @@ const items = (await getCollection('experience')).sort(
 const rendered = await Promise.all(
   items.map(async (e) => ({ data: e.data, Content: (await e.render()).Content }))
 );
+
+const dotColor = ['bg-brand-500 ring-brand-100', 'bg-coral-500 ring-coral-100', 'bg-sand-400 ring-sand-100'];
 ---
 <section id="experience" class="section bg-surface-alt">
   <div class="container-content">
@@ -24,7 +26,7 @@ const rendered = await Promise.all(
       <ol class="relative border-l border-ink/10 pl-6">
         {rendered.map(({ data, Content }, i) => (
           <li data-reveal style={`--reveal-delay:${i * 70}ms`} class="mb-9 last:mb-0">
-            <span class="absolute -left-[9px] mt-1.5 grid h-4 w-4 place-items-center rounded-full border-2 border-white bg-brand-500 ring-4 ring-brand-100"></span>
+            <span class={`absolute -left-[9px] mt-1.5 grid h-4 w-4 place-items-center rounded-full border-2 border-white ring-4 ${dotColor[i % 3]}`}></span>
             <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
               <h3 class="text-lg font-semibold text-ink">{data.role}</h3>
               <span class="chip !bg-brand-50 !text-brand-600 !border-brand-100">{data.date}</span>
