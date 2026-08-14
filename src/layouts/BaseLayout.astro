@@ -1,0 +1,244 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = `${site.name} · ${site.role}`,
+  description = site.about.intro,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#396cda" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:bg-brand-500 focus:px-4 focus:py-2 focus:text-white">
+      Skip to content
+    </a>
+
+    <slot />
+
+    <!-- Custom cursor -->
+    <div class="cursor-ring" data-cursor-ring aria-hidden="true"></div>
+    <div class="cursor-dot" data-cursor-dot aria-hidden="true"></div>
+
+    <script>
+      // ── Scroll reveal ──────────────────────────────────────
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      revealEls.forEach((el) => io.observe(el));
+
+      // ── Header shrink on scroll ────────────────────────────
+      const bar = document.querySelector('[data-nav-bar]');
+      const onScroll = () => {
+        if (!bar) return;
+        if (window.scrollY > 20) {
+          bar.classList.add('border-ink/10', 'shadow-card', '!bg-white/85');
+        } else {
+          bar.classList.remove('border-ink/10', 'shadow-card', '!bg-white/85');
+        }
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // ── Active nav link via section observer ───────────────
+      const navLinks = Array.from(document.querySelectorAll('[data-nav-links] a'));
+      const sections = navLinks
+        .map((a) => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+      const navIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = '#' + entry.target.id;
+              navLinks.forEach((a) => {
+                if (a.getAttribute('href') === id) a.setAttribute('data-active', '');
+                else a.removeAttribute('data-active');
+              });
+            }
+          });
+        },
+        { rootMargin: '-45% 0px -50% 0px' }
+      );
+      sections.forEach((s) => navIo.observe(s));
+
+      // ── Mobile menu ────────────────────────────────────────
+      const overlay = document.querySelector('[data-menu-overlay]');
+      const toggle = document.querySelector('[data-menu-toggle]');
+      const openMenu = () => {
+        overlay?.classList.remove('hidden');
+        overlay?.classList.add('flex');
+        toggle?.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeMenu = () => {
+        overlay?.classList.add('hidden');
+        overlay?.classList.remove('flex');
+        toggle?.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      };
+      toggle?.addEventListener('click', openMenu);
+      document.querySelector('[data-menu-close]')?.addEventListener('click', closeMenu);
+      overlay?.addEventListener('click', (e) => {
+        if (e.target === overlay) closeMenu();
+      });
+      document.querySelectorAll('[data-menu-link]').forEach((l) => l.addEventListener('click', closeMenu));
+
+      // ── Back to top ────────────────────────────────────────
+      document.querySelector('[data-back-to-top]')?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // ── Project filter ─────────────────────────────────────
+      const filterBtns = document.querySelectorAll('[data-filter]');
+      const cards = document.querySelectorAll('.project-card');
+      const emptyMsg = document.querySelector('[data-empty]');
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const cat = btn.getAttribute('data-filter');
+          filterBtns.forEach((b) => {
+            b.classList.remove('bg-brand-500', 'text-white', 'shadow-card');
+            b.classList.add('border', 'border-ink/10', 'bg-white', 'text-ink-muted');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('bg-brand-500', 'text-white', 'shadow-card');
+          btn.classList.remove('border', 'border-ink/10', 'bg-white', 'text-ink-muted');
+          btn.setAttribute('aria-pressed', 'true');
+          let shown = 0;
+          cards.forEach((card) => {
+            const match = cat === 'All' || card.getAttribute('data-category') === cat;
+            card.style.display = match ? '' : 'none';
+            if (match) shown++;
+          });
+          emptyMsg?.classList.toggle('hidden', shown !== 0);
+        });
+      });
+
+      // ── Lightbox ───────────────────────────────────────────
+      const modal = document.querySelector('[data-lightbox-modal]');
+      const modalImg = document.querySelector('[data-lightbox-img]');
+      const modalCap = document.querySelector('[data-lightbox-caption]');
+      document.querySelectorAll('[data-lightbox]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!modal || !modalImg) return;
+          modalImg.setAttribute('src', btn.getAttribute('data-src') || '');
+          if (modalCap) modalCap.textContent = btn.getAttribute('data-caption') || '';
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      const closeLightbox = () => {
+        modal?.classList.add('hidden');
+        modal?.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+      document.querySelector('[data-lightbox-close]')?.addEventListener('click', closeLightbox);
+      modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeLightbox();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeLightbox();
+          closeMenu();
+        }
+      });
+
+      // ── Contact form (graceful success on Netlify) ─────────
+      const form = document.querySelector('[data-contact-form]');
+      form?.addEventListener('submit', (e) => {
+        const success = document.querySelector('[data-form-success]');
+        if (!success) return;
+        // Let Netlify handle the POST in production; show inline feedback.
+        setTimeout(() => success.classList.remove('hidden'), 100);
+      });
+
+      // ── Custom cursor + magnetic buttons ───────────────────
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (finePointer && !reduceMotion) {
+        const dot = document.querySelector('[data-cursor-dot]');
+        const ring = document.querySelector('[data-cursor-ring]');
+        document.body.classList.add('cursor-ready', 'has-fine-pointer');
+        let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+        let rx = mx, ry = my;
+        const move = (e) => {
+          mx = e.clientX; my = e.clientY;
+          if (dot) { dot.style.opacity = '1'; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+          if (ring) ring.style.opacity = '1';
+        };
+        window.addEventListener('mousemove', move);
+        const loop = () => {
+          rx += (mx - rx) * 0.18;
+          ry += (my - ry) * 0.18;
+          if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+          requestAnimationFrame(loop);
+        };
+        loop();
+        document.querySelectorAll('a, button, [data-tilt], input, textarea').forEach((el) => {
+          el.addEventListener('mouseenter', () => ring?.classList.add('is-hovering'));
+          el.addEventListener('mouseleave', () => ring?.classList.remove('is-hovering'));
+        });
+
+        // Magnetic effect
+        document.querySelectorAll('[data-magnetic]').forEach((el) => {
+          el.addEventListener('mousemove', (e) => {
+            const r = el.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width / 2;
+            const y = e.clientY - r.top - r.height / 2;
+            el.style.transform = `translate(${x * 0.25}px, ${y * 0.3}px)`;
+          });
+          el.addEventListener('mouseleave', () => (el.style.transform = ''));
+        });
+
+        // Subtle tilt on cards
+        document.querySelectorAll('[data-tilt]').forEach((el) => {
+          el.addEventListener('mousemove', (e) => {
+            const r = el.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            el.style.transform = `perspective(900px) rotateX(${-py * 4}deg) rotateY(${px * 5}deg) translateY(-6px)`;
+          });
+          el.addEventListener('mouseleave', () => (el.style.transform = ''));
+        });
+      }
+    </script>
+  </body>
+</html>

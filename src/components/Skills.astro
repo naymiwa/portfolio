@@ -1,0 +1,60 @@
+---
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const groupIcon: Record<string, string> = {
+  Development: 'code',
+  'Design & Tools': 'palette',
+  'Talents Mapping': 'spark',
+};
+
+// Bold solid color themes per card: blue / red / yellow
+const themes = [
+  {
+    card: 'bg-brand-500 text-white',
+    icon: 'bg-white/15 text-white',
+    chip: 'bg-white/15 text-white hover:bg-white/25',
+  },
+  {
+    card: 'bg-coral-500 text-white',
+    icon: 'bg-white/15 text-white',
+    chip: 'bg-white/15 text-white hover:bg-white/25',
+  },
+  {
+    card: 'bg-sand-400 text-ink',
+    icon: 'bg-ink/10 text-ink',
+    chip: 'bg-ink/[0.07] text-ink hover:bg-ink/15',
+  },
+];
+---
+<section id="skills" class="section">
+  <div class="container-content">
+    <SectionHeading
+      eyebrow="What I do"
+      title="Skills & strengths"
+      subtitle="A blend of building, designing, and a mapped set of natural talents I lean on when I work."
+    />
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {site.skills.map((group, i) => {
+        const t = themes[i % 3];
+        return (
+          <div data-reveal style={`--reveal-delay:${i * 90}ms`} class={`group rounded-2xl p-7 shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover ${t.card}`}>
+            <div class="flex items-center gap-3">
+              <span class={`grid h-12 w-12 place-items-center rounded-xl ${t.icon}`}>
+                <Icon name={groupIcon[group.group] ?? 'star'} class="h-6 w-6" />
+              </span>
+              <h3 class="text-xl font-bold">{group.group}</h3>
+            </div>
+            <ul class="mt-6 flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <li class={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors duration-200 ${t.chip}`}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  const fa = a.data.featured ? 1 : 0;
+  const fb = b.data.featured ? 1 : 0;
+  if (fb !== fa) return fb - fa;
+  const oa = a.data.order ?? 0;
+  const ob = b.data.order ?? 0;
+  if (ob !== oa) return ob - oa;
+  return b.data.date.localeCompare(a.data.date);
+});
+
+// Solid color blocks cycled for cover placeholders
+const solids = ['bg-brand-500', 'bg-coral-500', 'bg-sand-400'];
+const solidText = ['text-white', 'text-white', 'text-ink'];
+
+// Category badge colors
+const catBadge: Record<string, string> = {
+  Web: 'bg-brand-500 text-white',
+  'UI/UX': 'bg-coral-500 text-white',
+  Hardware: 'bg-sand-400 text-ink',
+  Creative: 'bg-ink text-white',
+};
+---
+<section id="projects" class="section">
+  <div class="container-content">
+    <SectionHeading
+      eyebrow="Selected work"
+      title="Projects I'm proud of"
+      subtitle="From live web apps and UI/UX prototypes to hardware and creative builds."
+    />
+
+    <!-- Filters -->
+    <div data-reveal class="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
+      {site.projectCategories.map((cat, i) => (
+        <button
+          type="button"
+          data-filter={cat}
+          class:list={[
+            'rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+            i === 0
+              ? 'bg-brand-500 text-white shadow-card'
+              : 'border border-ink/10 bg-white text-ink-muted hover:border-brand-300 hover:text-brand-600',
+          ]}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-projects-grid>
+      {projects.map((p, i) => (
+        <article
+          data-reveal
+          style={`--reveal-delay:${(i % 3) * 80}ms`}
+          data-category={p.data.category}
+          class="project-card card group flex flex-col overflow-hidden hover:-translate-y-1.5 hover:shadow-card-hover"
+          data-tilt
+        >
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <!-- Solid color block (shown if no cover, or if the image fails to load) -->
+            <div class={`absolute inset-0 grid place-items-center ${solids[i % 3]}`}>
+              <span class={`font-display text-5xl font-bold opacity-90 ${solidText[i % 3]}`}>{p.data.title[0]}</span>
+            </div>
+            {p.data.cover && (
+              <img
+                src={p.data.cover}
+                alt={p.data.title}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.remove()"
+              />
+            )}
+            <span class={`absolute left-3 top-3 z-10 rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ${catBadge[p.data.category] ?? 'bg-white text-brand-600'}`}>
+              {p.data.category}
+            </span>
+          </div>
+
+          <div class="flex flex-1 flex-col p-5">
+            <h3 class="text-lg font-semibold text-ink">{p.data.title}</h3>
+            <p class="mt-2 flex-1 text-sm text-ink-muted">{p.data.description}</p>
+
+            {p.data.tags.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                {p.data.tags.map((t) => (
+                  <span class="rounded-md bg-surface-alt px-2 py-0.5 text-[11px] font-medium text-ink-faint">{t}</span>
+                ))}
+              </div>
+            )}
+
+            <div class="mt-5 flex items-center gap-4 border-t border-ink/[0.06] pt-4">
+              {p.data.demoUrl && (
+                <a href={p.data.demoUrl} target="_blank" rel="noopener noreferrer" class="link-underline inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
+                  Live demo <Icon name="arrowUpRight" class="h-4 w-4" />
+                </a>
+              )}
+              {p.data.repoUrl && (
+                <a href={p.data.repoUrl} target="_blank" rel="noopener noreferrer" class="link-underline inline-flex items-center gap-1 text-sm font-medium text-ink-muted">
+                  <Icon name="github" class="h-4 w-4" /> Code
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p data-empty class="mt-10 hidden text-center text-ink-muted">No projects in this category yet.</p>
+  </div>
+</section>

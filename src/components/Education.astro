@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('education')).sort(
+  (a, b) => b.data.order - a.data.order
+);
+const rendered = await Promise.all(
+  items.map(async (e) => ({ data: e.data, Content: (await e.render()).Content }))
+);
+---
+<ol class="mt-6 space-y-5">
+  {rendered.map(({ data, Content }) => (
+    <li class="relative rounded-2xl border border-ink/[0.06] bg-surface-alt/60 p-5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h4 class="font-semibold text-ink">{data.school}</h4>
+        <span class="text-xs font-medium text-ink-faint">{data.date}</span>
+      </div>
+      <p class="mt-0.5 text-sm font-medium text-brand-600">{data.program}</p>
+      {data.location && <p class="text-xs text-ink-faint">{data.location}</p>}
+      <div class="prose-portfolio mt-2 text-sm text-ink-muted">
+        <Content />
+      </div>
+    </li>
+  ))}
+</ol>
