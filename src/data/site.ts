@@ -39,7 +39,7 @@ export const site = {
       { label: 'Interests', value: 'Tech · ML · Astronomy' },
     ],
     // Portrait shown in the About section (place the file in /public/images).
-    portrait: '/images/portrait.jpg',
+    portrait: '/images/portrait.png',
   },
 
   // Quick top-line stats for the hero / about strip.
