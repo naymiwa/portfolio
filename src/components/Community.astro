@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const items = (await getCollection('community')).sort(
+  (a, b) => b.data.order - a.data.order
+);
+const rendered = await Promise.all(
+  items.map(async (e) => ({ data: e.data, Content: (await e.render()).Content }))
+);
+
+const kindColor: Record<string, string> = {
+  Community: 'bg-brand-50 text-brand-600 border-brand-100',
+  Event: 'bg-coral-50 text-coral-600 border-coral-100',
+  'Social Project': 'bg-sand-100 text-sand-700 border-sand-200',
+  Experience: 'bg-surface-alt text-ink-muted border-ink/10',
+};
+---
+<section id="community" class="section bg-surface-alt">
+  <div class="container-content">
+    <SectionHeading
+      eyebrow="Beyond the code"
+      title="Community, events & social projects"
+      subtitle="Volunteering, organizing, and hands-on projects that give back and grow people."
+    />
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {rendered.map(({ data, Content }, i) => (
+        <article data-reveal style={`--reveal-delay:${(i % 3) * 80}ms`} class="card group flex flex-col p-6 hover:-translate-y-1 hover:shadow-card-hover">
+          <div class="flex items-center justify-between">
+            <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600">
+              <Icon name="users" class="h-5 w-5" />
+            </span>
+            <span class:list={['rounded-full border px-2.5 py-1 text-[11px] font-semibold', kindColor[data.kind]]}>
+              {data.kind}
+            </span>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-ink">{data.title}</h3>
+          {data.role && <p class="text-sm font-medium text-coral-600">{data.role}</p>}
+          {data.date && <p class="text-xs text-ink-faint">{data.date}</p>}
+          <div class="prose-portfolio mt-2 text-sm text-ink-muted">
+            <Content />
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+// Lightweight inline SVG icon set. Usage: <Icon name="github" class="h-5 w-5" />
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = 'h-5 w-5' } = Astro.props;
+
+const paths: Record<string, string> = {
+  email:
+    '<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2 8 5 8-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  instagram:
+    '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>',
+  youtube:
+    '<rect x="2.5" y="5" width="19" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.2v5.6l4.8-2.8L10 9.2Z" fill="currentColor"/>',
+  linkedin:
+    '<rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 10v7M7 7.2v.01M11 17v-4a2 2 0 0 1 4 0v4M11 17v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  github:
+    '<path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.59.69.48A10 10 0 0 0 12 2Z" fill="currentColor"/>',
+  arrowUpRight:
+    '<path d="M7 17 17 7M17 7H8m9 0v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  arrowRight:
+    '<path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  arrowDown:
+    '<path d="M12 5v14m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  download:
+    '<path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  code:
+    '<path d="m8 8-4 4 4 4m8-8 4 4-4 4m-2-11-4 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  palette:
+    '<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.5-.9 1.5-1.7 0-1.2-1-1.4-1-2.3 0-.6.5-1 1.2-1H15a5 5 0 0 0 5-5c0-4.4-3.6-8-8-8Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="7.5" cy="11.5" r="1" fill="currentColor"/><circle cx="10" cy="7.5" r="1" fill="currentColor"/><circle cx="14.5" cy="7.5" r="1" fill="currentColor"/>',
+  spark:
+    '<path d="M12 3v4m0 10v4M5 12H3m18 0h-2M6 6l1.5 1.5M18 18l-1.5-1.5M6 18l1.5-1.5M18 6l-1.5 1.5M12 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  star:
+    '<path d="m12 3 2.6 5.7L21 9.5l-4.5 4.3L17.6 21 12 17.7 6.4 21l1.1-7.2L3 9.5l6.4-.8L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+  briefcase:
+    '<rect x="3" y="7" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+  cap:
+    '<path d="m12 4 10 5-10 5L2 9l10-5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 11v4c0 1.7 2.7 3 6 3s6-1.3 6-3v-4" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+  quote:
+    '<path d="M7 7c-2 1-3 2.7-3 5v5h5v-5H6c0-1.7.6-2.7 2-3.4L7 7Zm9 0c-2 1-3 2.7-3 5v5h5v-5h-3c0-1.7.6-2.7 2-3.4L16 7Z" fill="currentColor"/>',
+  pin:
+    '<path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+  users:
+    '<circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 20a6 6 0 0 1 12 0M16 5.3a3 3 0 0 1 0 5.4M18 20a6 6 0 0 0-3-5.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  close:
+    '<path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  menu:
+    '<path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+};
+
+const inner = paths[name] ?? '';
+---
+<svg class={className} viewBox="0 0 24 24" aria-hidden="true" set:html={inner}></svg>

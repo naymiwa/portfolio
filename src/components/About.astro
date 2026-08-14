@@ -1,0 +1,47 @@
+---
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+---
+<section id="about" class="section bg-surface-alt">
+  <div class="container-content">
+    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- Portrait -->
+      <div data-reveal class="relative order-1 mx-auto w-full max-w-md lg:order-none">
+        <div class="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-tr from-brand-200 via-sand-200 to-coral-200 blur-xl opacity-70"></div>
+        <div class="overflow-hidden rounded-[1.75rem] border border-white/60 shadow-card-hover">
+          <img
+            src={site.about.portrait}
+            alt={`Portrait of ${site.name}`}
+            class="aspect-[4/5] w-full object-cover"
+            loading="lazy"
+            onerror="this.style.display='none';this.parentElement.classList.add('grid','place-items-center','bg-brand-50','aspect-[4/5]');this.parentElement.innerHTML='<span class=\'font-display text-5xl font-bold text-brand-300\'>NA</span>'"
+          />
+        </div>
+        <div class="absolute -bottom-5 -right-4 rounded-2xl bg-white px-4 py-3 shadow-card">
+          <div class="flex items-center gap-2 text-sm font-semibold text-ink">
+            <Icon name="pin" class="h-4 w-4 text-coral-500" /> Bogor, Indonesia
+          </div>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div>
+        <SectionHeading eyebrow="About me" title="Curious by nature, driven by impact" />
+        <p data-reveal class="mt-6 text-lg font-medium text-ink">{site.about.intro}</p>
+        {site.about.body.map((p) => (
+          <p data-reveal class="mt-4 text-ink-muted">{p}</p>
+        ))}
+
+        <dl data-reveal class="mt-8 grid grid-cols-2 gap-4">
+          {site.about.facts.map((f) => (
+            <div class="rounded-xl border border-ink/[0.06] bg-white px-4 py-3">
+              <dt class="text-xs uppercase tracking-wide text-ink-faint">{f.label}</dt>
+              <dd class="mt-0.5 text-sm font-semibold text-ink">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>

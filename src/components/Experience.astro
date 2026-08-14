@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import Education from './Education.astro';
+
+const items = (await getCollection('experience')).sort(
+  (a, b) => b.data.order - a.data.order
+);
+const rendered = await Promise.all(
+  items.map(async (e) => ({ data: e.data, Content: (await e.render()).Content }))
+);
+---
+<section id="experience" class="section bg-surface-alt">
+  <div class="container-content">
+    <SectionHeading
+      eyebrow="Experience"
+      title="Where I've learned & contributed"
+      subtitle="Internships and hands-on roles that shaped how I work."
+    />
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+      <!-- Timeline -->
+      <ol class="relative border-l border-ink/10 pl-6">
+        {rendered.map(({ data, Content }, i) => (
+          <li data-reveal style={`--reveal-delay:${i * 70}ms`} class="mb-9 last:mb-0">
+            <span class="absolute -left-[9px] mt-1.5 grid h-4 w-4 place-items-center rounded-full border-2 border-white bg-brand-500 ring-4 ring-brand-100"></span>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <h3 class="text-lg font-semibold text-ink">{data.role}</h3>
+              <span class="chip !bg-brand-50 !text-brand-600 !border-brand-100">{data.date}</span>
+            </div>
+            <p class="mt-0.5 flex items-center gap-2 text-sm font-medium text-coral-600">
+              <Icon name="briefcase" class="h-4 w-4" /> {data.org}
+              {data.location && <span class="text-ink-faint">· {data.location}</span>}
+            </p>
+            <div class="prose-portfolio mt-2 text-sm text-ink-muted">
+              <Content />
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <!-- Education panel -->
+      <div data-reveal class="card h-max p-7">
+        <div class="flex items-center gap-3">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-sand-100 text-sand-700">
+            <Icon name="cap" class="h-5 w-5" />
+          </span>
+          <h3 class="text-xl font-semibold text-ink">Education</h3>
+        </div>
+        <Education />
+      </div>
+    </div>
+  </div>
+</section>
