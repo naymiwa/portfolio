@@ -6,36 +6,28 @@ import Icon from './Icon.astro';
 <section id="about" class="section bg-surface-alt">
   <div class="container-content">
     <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-      <!-- Portrait: transparent cutout on a cool on-brand background -->
-      <div data-reveal class="relative order-1 mx-auto w-full max-w-[19rem] lg:order-none">
-        <!-- soft outer glow -->
-        <div class="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-brand-300/50 via-sand-200/50 to-coral-200/50 blur-2xl"></div>
-
-        <!-- the panel -->
-        <div class="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-card-hover ring-1 ring-white/40">
-          <!-- blended brand background -->
-          <div class="absolute inset-0 bg-gradient-to-br from-brand-400 via-brand-500 to-brand-700"></div>
-          <div class="absolute -left-8 top-4 h-40 w-40 rounded-full bg-coral-500/70 blur-2xl animate-blob-drift"></div>
-          <div class="absolute -right-6 bottom-6 h-44 w-44 rounded-full bg-sand-400/70 blur-2xl animate-blob-drift" style="animation-delay:-7s"></div>
-          <div class="absolute inset-0 grain opacity-20"></div>
-          <!-- white halo so the subject pops -->
-          <div class="absolute bottom-0 left-1/2 h-3/4 w-4/5 -translate-x-1/2 rounded-full bg-white/30 blur-3xl"></div>
-          <!-- little solid accents -->
-          <div class="absolute right-5 top-5 h-9 w-9 rotate-12 rounded-lg bg-sand-400"></div>
-          <div class="absolute right-8 top-16 h-4 w-4 rounded-full bg-coral-500"></div>
-
-          <!-- subject cutout -->
-          <img
-            src={site.about.portrait}
-            alt={`Portrait of ${site.name}`}
-            class="absolute inset-0 h-full w-full object-contain object-bottom [filter:drop-shadow(0_18px_24px_rgba(17,31,66,0.35))]"
-            loading="lazy"
-            onerror="this.style.display='none'"
-          />
+      <!-- Portrait: transparent cutout floating on a soft blue gradient that blends into the section -->
+      <div data-reveal class="relative order-1 mx-auto w-full max-w-sm lg:order-none">
+        <!-- soft, frameless brand gradient (no hard edges, bleeds into the section) -->
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+          <div class="absolute left-1/2 top-1/2 h-[125%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-400 via-brand-500 to-brand-700 opacity-90 blur-[70px]"></div>
+          <div class="absolute -left-6 top-2 h-44 w-44 rounded-full bg-coral-500/55 blur-[60px] animate-blob-drift"></div>
+          <div class="absolute -right-4 bottom-6 h-48 w-48 rounded-full bg-sand-400/55 blur-[60px] animate-blob-drift" style="animation-delay:-7s"></div>
+          <!-- soft white halo behind the subject so she pops -->
+          <div class="absolute bottom-2 left-1/2 h-2/3 w-3/4 -translate-x-1/2 rounded-full bg-white/25 blur-[60px]"></div>
         </div>
 
+        <!-- subject cutout, no frame -->
+        <img
+          src={site.about.portrait}
+          alt={`Portrait of ${site.name}`}
+          class="relative z-10 mx-auto w-full object-contain [filter:drop-shadow(0_18px_28px_rgba(17,31,66,0.35))]"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+
         <!-- location badge -->
-        <div class="absolute -bottom-4 -right-3 rounded-2xl bg-white px-4 py-3 shadow-card">
+        <div class="absolute bottom-3 right-1 z-20 rounded-2xl bg-white/95 px-4 py-3 shadow-card backdrop-blur">
           <div class="flex items-center gap-2 text-sm font-semibold text-ink">
             <Icon name="pin" class="h-4 w-4 text-coral-500" /> Bogor, Indonesia
           </div>
