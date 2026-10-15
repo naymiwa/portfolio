@@ -5,7 +5,7 @@ category: 'Web'
 date: '2024'
 order: 100
 featured: true
-cover: '/images/projects/nasa-apod.jpg'
+cover: '/images/projects/nasa-apod.svg'
 tags: ['HTML', 'CSS', 'JavaScript', 'NASA API']
 demoUrl: 'https://nasaapodre.netlify.app/'
 ---

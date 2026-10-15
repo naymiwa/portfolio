@@ -4,7 +4,7 @@ description: 'Transformed a regular trash bin into an automatic, sensor-driven o
 category: 'Hardware'
 date: '2022'
 order: 70
-cover: '/images/projects/smart-dustbin.jpg'
+cover: '/images/projects/smart-dustbin.svg'
 tags: ['Arduino', 'Sensors', 'IoT']
 ---
 

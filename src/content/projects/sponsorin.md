@@ -5,7 +5,7 @@ category: 'UI/UX'
 date: '2024'
 order: 90
 featured: true
-cover: '/images/projects/sponsorin.jpg'
+cover: '/images/projects/sponsorin.svg'
 tags: ['Figma', 'UI/UX', 'Wireframing', 'Prototype']
 ---
 

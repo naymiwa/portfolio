@@ -4,7 +4,7 @@ description: 'Combining a childhood love of photography with astronomy, capturin
 category: 'Creative'
 date: '2022'
 order: 50
-cover: '/images/projects/astrophotography.jpg'
+cover: '/images/projects/astrophotography.svg'
 tags: ['Photography', 'Astronomy']
 ---
 

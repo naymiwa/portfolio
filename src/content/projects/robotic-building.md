@@ -4,7 +4,7 @@ description: 'My first individual project, learning robotics from the basics at 
 category: 'Hardware'
 date: '2021'
 order: 60
-cover: '/images/projects/robotics.jpg'
+cover: '/images/projects/robotics.svg'
 tags: ['Robotics', 'Electronics', 'Self-learning']
 ---
 
