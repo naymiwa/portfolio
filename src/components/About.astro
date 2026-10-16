@@ -6,12 +6,12 @@ import SectionHeading from './SectionHeading.astro';
   <div class="container-content">
     <div class="max-w-2xl">
       <SectionHeading align="left" title="About me" />
-      <p data-reveal class="mt-4 text-left text-base font-medium text-ink">{site.about.intro}</p>
+      <p data-reveal class="mt-4 text-justify text-base font-medium text-ink">{site.about.intro}</p>
       {site.about.body.map((p) => (
-        <p data-reveal class="mt-3 text-left text-sm leading-relaxed text-ink-muted">{p}</p>
+        <p data-reveal class="mt-3 text-justify text-sm leading-relaxed text-ink-muted">{p}</p>
       ))}
 
-      <dl data-reveal class="mt-5 flex flex-wrap justify-center gap-2">
+      <dl data-reveal class="mt-5 flex flex-wrap gap-2">
         {site.about.facts.map((f) => (
           <div class="rounded-full border border-ink/[0.06] bg-white px-3 py-1.5 text-center">
             <dt class="text-[10px] uppercase tracking-wide text-ink-faint">{f.label}</dt>
