@@ -5,6 +5,7 @@ import Icon from './Icon.astro';
 
 const contactSocials = [
   { key: 'Email', href: site.socials.email, name: 'email' },
+  { key: 'WhatsApp', href: site.socials.whatsapp, name: 'whatsapp', color: 'text-whatsapp hover:text-whatsapp-dark' },
   { key: 'Instagram', href: site.socials.instagram, name: 'instagram' },
   { key: 'YouTube', href: site.socials.youtube, name: 'youtube' },
   { key: 'LinkedIn', href: site.socials.linkedin, name: 'linkedin' },
@@ -19,7 +20,7 @@ const contactSocials = [
       <div class="flex flex-wrap items-center justify-center gap-3">
         {contactSocials.map((s) => (
           <a href={s.href} target={s.name === 'email' ? undefined : '_blank'} rel="noopener noreferrer" class="group flex items-center gap-2 text-ink-muted hover:text-brand-600 transition-colors">
-            <Icon name={s.name} class="h-4 w-4" />
+            <Icon name={s.name} class:list={['h-4 w-4', s.color]} />
             <span class="text-sm font-medium">{s.key}</span>
           </a>
         ))}

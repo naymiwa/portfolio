@@ -54,6 +54,7 @@ export const site = {
   // Social links. Empty string hides the icon. Fill these in.
   socials: {
     email: 'mailto:naylaargia@gmail.com',
+    whatsapp: 'https://wa.me/6282299925225',
     instagram: 'https://instagram.com/naylargia',
     youtube: 'https://www.youtube.com/@naylaargia',
     linkedin: 'https://www.linkedin.com/in/naylaargia/',
