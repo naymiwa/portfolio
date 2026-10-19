@@ -1,5 +1,5 @@
 ---
-school: 'Senior High School'
+school: 'SMA ABhome'
 program: 'Science Program'
 date: '2021 - 2024'
 order: 10
