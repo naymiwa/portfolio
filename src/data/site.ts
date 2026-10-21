@@ -25,8 +25,8 @@ export const site = {
     intro:
       'Software Engineering Technology student at IPB University with hands-on experience in web development, robotics, and astronomy outreach.',
     body: [
-      'I have interned as a Planetarium Guide & Moderator at SkyWorld TMII, a Robotics Assistant at Robotickidz, and a Digital Content Creator at MUNASAIN.',
-      'I enjoy building responsive websites, prototyping interfaces, and turning curiosity about space into practical digital experiences.',
+      'Previous experience includes working as a Planetarium Guide & Moderator at SkyWorld TMII, a Robotics Assistant at Robotickidz, and a Digital Content Creator.',
+      'Interested in Machine Learning and Astronomy, with a passion for teaching and science communication. Enjoys building websites, prototyping interfaces, and turning curiosity about space into practical digital experiences.',
     ],
     facts: [
       { label: 'University', value: 'IPB University' },
