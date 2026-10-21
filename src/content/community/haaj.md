@@ -1,5 +1,5 @@
 ---
-title: 'HAAJ · Astrokids'
+title: 'HAAJ'
 role: 'Member · Amateur Astronomy Community'
 kind: 'Community'
 date: 'Jakarta'

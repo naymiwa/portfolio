@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#fdf9ef"/>
+  <rect x="8" y="8" width="184" height="184" rx="10" fill="none" stroke="#f1cc87" stroke-width="4"/>
+  <path d="M84 96 L78 148 L100 135 L122 148 L116 96 Z" fill="#d69c36"/>
+  <path d="M100 46 L108.2 68.7 L132.3 69.5 L113.3 84.3 L120 107.5 L100 94 L79.9 107.5 L86.7 84.3 L67.6 69.5 L91.8 68.7 Z" fill="#e9b85f"/>
+  <text x="100" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#a9791f">Certificate</text>
+</svg>

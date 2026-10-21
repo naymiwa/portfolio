@@ -18,6 +18,36 @@ const kindColor: Record<string, string> = {
   'Social Project': 'bg-sand-100 text-sand-700 border-sand-200',
   Experience: 'bg-surface-alt text-ink-muted border-ink/10',
 };
+
+const awards = [
+  {
+    title: '3rd Place Infographic UNITY Competition',
+    issuer: 'UNITY Competition UIN Malang',
+    date: 'Apr 2026',
+    description:
+      'Created an infographic with the theme "The Powers of Social Media" and the title "Why do we easily believe hoaxes?" and won 3rd place at the national level.',
+    image: '/images/awards/unity-infographic.svg',
+    alt: 'UNITY Competition infographic certificate',
+  },
+  {
+    title: '1st Place BSEC Infographic Competition',
+    issuer: 'STIE Surakarta',
+    date: 'Mar 2026',
+    description:
+      'Won 1st place in an infographic competition focused on the future of Artificial Intelligence in education over the next five years.',
+    image: '/images/awards/bsec-infographic.svg',
+    alt: 'BSEC Infographic Competition certificate',
+  },
+  {
+    title: '3rd Place IT FESTIVAL IPB',
+    issuer: 'IPB University',
+    date: 'Aug 2025',
+    description:
+      'I placed 3rd in a poster competition at IPB University on the theme of Artificial Intelligence and Education.',
+    image: '/images/awards/it-festival-ipb.svg',
+    alt: 'IT Festival IPB poster competition award',
+  },
+];
 ---
 <section id="community" class="section bg-surface-alt">
   <div class="container-content">
@@ -46,6 +76,38 @@ const kindColor: Record<string, string> = {
           </div>
         </article>
       ))}
+
+      <!-- Awards column (beside HAAJ & HIMAVO cards) -->
+      <div
+        data-reveal
+        class="flex flex-col gap-4 sm:col-span-2 lg:col-span-1 lg:col-start-3 lg:row-start-1"
+      >
+        <div class="flex items-center gap-2.5 px-1">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-coral-500 text-white">
+            <Icon name="star" class="h-4 w-4" />
+          </span>
+          <h3 class="text-base font-semibold text-ink">Awards & Competitions</h3>
+        </div>
+        {awards.map((a) => (
+          <article class="card flex items-start gap-3.5 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
+            <div class="relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-lg bg-sand-100">
+              <Icon name="star" class="h-7 w-7 text-sand-600" />
+              <img
+                src={a.image}
+                alt={a.alt}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover"
+                onerror="this.remove()"
+              />
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-sm font-semibold leading-snug text-ink">{a.title}</h4>
+              <p class="mt-0.5 text-[11px] text-ink-faint">{a.issuer} · {a.date}</p>
+              <p class="mt-1.5 text-xs leading-relaxed text-ink-muted">{a.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </div>
 </section>
