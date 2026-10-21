@@ -14,7 +14,7 @@ export const site = {
   location: 'IPB University · Bogor, Indonesia',
   email: 'naylaargia@gmail.com',
   // Path (in /public) to your CV/portfolio PDF for the download button.
-  cv: '/Portfolio-Nayla-Aqila-Argia.pdf',
+  cv: '/CV-Nayla-Aqila-Argia-2026.pdf',
 
   quote: {
     text: 'Astronomy compels the soul to look upwards and leads us from this world to another.',
