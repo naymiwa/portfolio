@@ -12,13 +12,9 @@ export const site = {
   monogram: 'NA',
   role: 'Software Engineering Technology Student',
   location: 'IPB University · Bogor, Indonesia',
-  email: 'hello@example.com', // TODO: replace with your real email
+  email: 'naylaargia@gmail.com',
   // Path (in /public) to your CV/portfolio PDF for the download button.
   cv: '/Portfolio-Nayla-Aqila-Argia.pdf',
-
-  // Short hero tagline (supports the highlighted word via {highlight}).
-  tagline: 'I build impactful digital experiences, where technology, design, and a love for astronomy meet.',
-  heroHighlight: 'astronomy',
 
   quote: {
     text: 'Astronomy compels the soul to look upwards and leads us from this world to another.',
@@ -27,27 +23,17 @@ export const site = {
 
   about: {
     intro:
-      "Hi, I'm Nayla Aqila Argia, passionate about technology, machine learning, and astronomy.",
+      'Software Engineering Technology student at IPB University with hands-on experience in web development, robotics, and astronomy outreach.',
     body: [
-      'Currently pursuing a degree in Software Engineering Technology at IPB University, I am driven by curiosity and a desire to create impactful digital experiences through continuous learning and collaboration.',
-      'I love combining what I learn with what I am curious about, from building responsive websites and designing intuitive interfaces, to tinkering with robotics and capturing the night sky through astrophotography.',
+      'Previous experience includes working as a Planetarium Guide & Moderator at SkyWorld TMII, a Robotics Assistant at Robotickidz, and a Digital Content Creator.',
+      'Interested in Machine Learning and Astronomy, with a passion for teaching and science communication. Enjoys building websites, prototyping interfaces, and turning curiosity about space into practical digital experiences.',
     ],
     facts: [
       { label: 'University', value: 'IPB University' },
       { label: 'Major', value: 'Software Engineering Tech' },
       { label: 'Based in', value: 'Bogor, Indonesia' },
-      { label: 'Interests', value: 'Tech · ML · Astronomy' },
     ],
-    // Portrait shown in the About section (place the file in /public/images).
-    portrait: '/images/portrait.png',
   },
-
-  // Quick top-line stats for the hero / about strip.
-  stats: [
-    { value: '10+', label: 'Projects built' },
-    { value: '3', label: 'Internships' },
-    { value: '5+', label: 'Communities & events' },
-  ],
 
   // Grouped skills. Add/remove freely.
   skills: [
@@ -60,18 +46,19 @@ export const site = {
       items: ['UI / UX Design', 'Figma', 'Thunkable', 'Netlify', 'Canva'],
     },
     {
-      group: 'Talents Mapping',
-      items: ['Research', 'Creative Design', 'Analyzing & Sorting', 'Persuading', 'Cost Estimation', 'Recognizing'],
+      group: 'Robotics & Hardware',
+      items: ['Arduino / IoT', 'Robotics', 'Hardware Prototyping'],
     },
   ],
 
   // Social links. Empty string hides the icon. Fill these in.
   socials: {
-    email: 'mailto:hello@example.com', // TODO
-    instagram: 'https://instagram.com/', // TODO
-    youtube: 'https://youtube.com/', // TODO
-    linkedin: 'https://linkedin.com/in/', // TODO
-    github: 'https://github.com/', // TODO
+    email: 'mailto:naylaargia@gmail.com',
+    whatsapp: 'https://wa.me/6282299925225',
+    instagram: 'https://instagram.com/naylargia',
+    youtube: 'https://www.youtube.com/@naylaargia',
+    linkedin: 'https://www.linkedin.com/in/naylaargia/',
+    github: 'https://github.com/naymiwa',
   },
 
   // Project filter categories (must match `category` in project files).
@@ -80,11 +67,8 @@ export const site = {
   nav: [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Community', href: '#community' },
-    { label: 'Gallery', href: '#gallery' },
     { label: 'Contact', href: '#contact' },
   ],
 };

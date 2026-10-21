@@ -5,7 +5,7 @@ category: 'Web'
 date: '2023'
 order: 95
 featured: true
-cover: '/images/projects/astro-web.jpg'
+cover: '/images/projects/astro-web.svg'
 tags: ['HTML', 'CSS', 'JavaScript', 'Responsive']
 demoUrl: 'https://space-web-naylargia.netlify.app/'
 ---
