@@ -1,8 +1,8 @@
 ---
 org: 'MUNASAIN · Museum Nasional Sejarah Alam Indonesia'
 role: 'Content Creator Intern'
-date: '2024'
-order: 30
+date: '2022'
+order: 15
 location: 'Internship'
 ---
 
