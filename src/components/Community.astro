@@ -61,9 +61,20 @@ const awards = [
       {rendered.map(({ data, Content }, i) => (
         <article data-reveal style={`--reveal-delay:${(i % 3) * 80}ms`} class="card group flex flex-col p-6 hover:-translate-y-1 hover:shadow-card-hover">
           <div class="flex items-center justify-between">
-            <span class={`grid h-11 w-11 place-items-center rounded-xl ${iconThemes[i % 3]}`}>
-              <Icon name="users" class="h-5 w-5" />
-            </span>
+            {data.cover ? (
+              <span class="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-surface-alt ring-1 ring-ink/5">
+                <img
+                  src={data.cover}
+                  alt={`${data.title} logo`}
+                  loading="lazy"
+                  class="h-full w-full object-contain"
+                />
+              </span>
+            ) : (
+              <span class={`grid h-11 w-11 place-items-center rounded-xl ${iconThemes[i % 3]}`}>
+                <Icon name="users" class="h-5 w-5" />
+              </span>
+            )}
             <span class:list={['rounded-full border px-2.5 py-1 text-[11px] font-semibold', kindColor[data.kind]]}>
               {data.kind}
             </span>
