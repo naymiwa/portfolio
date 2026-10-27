@@ -4,8 +4,9 @@ description: 'Transformed a regular trash bin into an automatic, sensor-driven o
 category: 'Hardware'
 date: '2022'
 order: 70
-cover: '/images/projects/smart-dustbin.svg'
+cover: '/images/projects/smart-dustbin-cover.png'
 tags: ['Arduino', 'Sensors', 'IoT']
+demoUrl: 'https://github.com/naymiwa/smartdustbin-ide/tree/main'
 ---
 
 Transformed a regular trash bin into an **automatic Smart Dustbin** using sensors and an Arduino. Self-learned through online resources, the bin opens automatically when an object is detected roughly **10 cm** away, making waste disposal easier and more efficient.
