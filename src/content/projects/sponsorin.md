@@ -5,7 +5,7 @@ category: 'UI/UX'
 date: '2024'
 order: 90
 featured: true
-cover: '/images/projects/sponsorin.svg'
+cover: '/images/projects/sponsorin-cover.png'
 demoUrl: 'https://www.figma.com/proto/Aow22Vijvs6QCDRNwAx9Kf/TECHSPRINT-UI-UX-2026?node-id=823-4155&p=f&t=DY3PwBUuKBZgHTFs-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=823%3A4155&show-proto-sidebar=1'
 tags: ['Figma', 'UI/UX', 'Wireframing', 'Prototype']
 ---
