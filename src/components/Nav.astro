@@ -14,9 +14,19 @@ import Icon from './Icon.astro';
     >
       <a href="#home" class="group flex items-center gap-2.5" aria-label="Home">
         <span
-          class="grid h-9 w-9 place-items-center rounded-full bg-brand-500 font-display text-sm font-bold text-white transition-transform duration-300 group-hover:scale-105"
-          >{site.monogram}</span
+          class="grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-brand-500 font-display text-sm font-bold text-white transition-transform duration-300 group-hover:scale-105"
         >
+          {site.avatar ? (
+            <img
+              src={site.avatar}
+              alt={site.name}
+              class="h-full w-full object-cover"
+              onerror={`this.remove()`}
+            />
+          ) : (
+            site.monogram
+          )}
+        </span>
         <span class="hidden font-display text-sm font-semibold text-ink sm:block"
           >{site.name}</span
         >

@@ -10,6 +10,7 @@ export const site = {
   name: 'Nayla Aqila Argia',
   shortName: 'Nayla',
   monogram: 'NA',
+  avatar: '/images/avatar.jpeg',
   role: 'Software Engineering Technology Student',
   location: 'IPB University · Bogor, Indonesia',
   email: 'naylaargia@gmail.com',
