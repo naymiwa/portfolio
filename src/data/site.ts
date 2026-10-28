@@ -62,7 +62,7 @@ export const site = {
   },
 
   // Project filter categories (must match `category` in project files).
-  projectCategories: ['All', 'Web', 'UI/UX', 'Hardware', 'Creative'],
+  projectCategories: ['All', 'Web', 'UI/UX', 'Hardware', 'Creative', 'ML'],
 
   nav: [
     { label: 'Home', href: '#home' },
