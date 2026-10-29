@@ -24,6 +24,7 @@ const experience = defineCollection({
     date: z.string(),
     order: z.number(), // higher = more recent (sorted desc)
     location: z.string().optional(),
+    locationUrl: z.string().url().optional(),
     cover: z.string().optional(),
   }),
 });
