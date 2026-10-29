@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import Icon from '../components/Icon.astro';
 
 interface Props {
   title?: string;
@@ -49,6 +50,25 @@ const ogImage = new URL('/og-image.svg', Astro.site);
     </a>
 
     <slot />
+
+    <!-- Lightbox (full-size image preview, opened via [data-lightbox] triggers) -->
+    <div
+      data-lightbox-modal
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-ink/80 p-4 backdrop-blur-sm"
+    >
+      <button
+        type="button"
+        data-lightbox-close
+        aria-label="Close preview"
+        class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+      >
+        <Icon name="close" class="h-5 w-5" />
+      </button>
+      <figure class="max-h-[90vh] max-w-[90vw]">
+        <img data-lightbox-img src="" alt="" class="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl" />
+        <figcaption data-lightbox-caption class="mt-3 text-center text-sm text-white/80"></figcaption>
+      </figure>
+    </div>
 
     <script>
       // ── Scroll reveal ──────────────────────────────────────

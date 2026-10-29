@@ -95,15 +95,33 @@ const awards = [
         </div>
         {awards.map((a) => (
           <article class="card flex items-start gap-3.5 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
-            <div class="relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-lg bg-sand-100">
-              <Icon name="star" class="h-7 w-7 text-sand-600" />
-              <img
-                src={a.image}
-                alt={a.alt}
-                loading="lazy"
-                class="absolute inset-0 h-full w-full object-cover"
-                onerror="this.remove()"
-              />
+            <div class="group relative shrink-0">
+              <button
+                type="button"
+                data-lightbox
+                data-src={a.image}
+                data-caption={`${a.title} — ${a.issuer}`}
+                aria-label={`View full ${a.alt}`}
+                class="relative grid h-16 w-16 cursor-zoom-in place-items-center overflow-hidden rounded-lg bg-sand-100"
+              >
+                <Icon name="star" class="h-7 w-7 text-sand-600" />
+                <img
+                  src={a.image}
+                  alt={a.alt}
+                  loading="lazy"
+                  class="absolute inset-0 h-full w-full object-cover"
+                  onerror="this.remove()"
+                />
+              </button>
+              <!-- Desktop hover preview (full image). Mobile/touch users tap the thumbnail to open the lightbox instead. -->
+              <div class="pointer-events-none absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 md:group-hover:block">
+                <img
+                  src={a.image}
+                  alt={a.alt}
+                  class="h-56 w-56 rounded-xl object-cover shadow-card-hover ring-1 ring-ink/10"
+                  onerror="this.parentElement.remove()"
+                />
+              </div>
             </div>
             <div class="min-w-0">
               <h4 class="text-sm font-semibold leading-snug text-ink">{a.title}</h4>
