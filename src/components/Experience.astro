@@ -33,7 +33,23 @@ const dotColor = ['bg-brand-500 ring-brand-100', 'bg-coral-500 ring-coral-100', 
             </div>
             <p class="mt-0.5 flex items-center gap-2 text-sm font-medium text-coral-600">
               <Icon name="briefcase" class="h-4 w-4" /> {data.org}
-              {data.location && <span class="text-ink-faint">· {data.location}</span>}
+              {data.location && (
+                <span class="text-ink-faint">
+                  ·{' '}
+                  {data.locationUrl ? (
+                    <a
+                      href={data.locationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="link-underline text-ink-faint hover:text-brand-600"
+                    >
+                      {data.location}
+                    </a>
+                  ) : (
+                    data.location
+                  )}
+                </span>
+              )}
             </p>
             <div class="prose-portfolio mt-2 text-sm text-ink-muted">
               <Content />
