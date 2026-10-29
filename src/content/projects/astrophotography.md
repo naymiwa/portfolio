@@ -4,8 +4,9 @@ description: 'Combining a childhood love of photography with astronomy, capturin
 category: 'Creative'
 date: '2022'
 order: 50
-cover: '/images/projects/astrophotography.svg'
+cover: '/images/projects/astrophotography-cover.jpg'
 tags: ['Photography', 'Astronomy']
+demoUrl: 'https://drive.google.com/drive/folders/1UBJiqJ850GVJGqNG_ACxoUF5V97lDiEC'
 ---
 
 I engage in **astrophotography** as a hobby. Since my childhood interest lies in photography, and I also enjoy studying astronomy, I combine these two passions to capture images of celestial objects during the nighttime.
