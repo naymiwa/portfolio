@@ -1,6 +1,6 @@
 ---
-school: 'Senior High School'
-program: 'Science Program'
+school: 'SMA ABhome'
+program: 'Highschool'
 date: '2021 - 2024'
 order: 10
 location: 'Indonesia'
