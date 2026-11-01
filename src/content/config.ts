@@ -5,7 +5,7 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    category: z.enum(['Web', 'UI/UX', 'Hardware', 'Creative']),
+    category: z.enum(['Web', 'UI/UX', 'Hardware', 'Creative', 'ML']),
     date: z.string(), // e.g. "2024", used for ordering (desc)
     order: z.number().optional(),
     cover: z.string().optional(),
@@ -24,6 +24,7 @@ const experience = defineCollection({
     date: z.string(),
     order: z.number(), // higher = more recent (sorted desc)
     location: z.string().optional(),
+    locationUrl: z.string().url().optional(),
     cover: z.string().optional(),
   }),
 });
@@ -36,6 +37,7 @@ const education = defineCollection({
     date: z.string(),
     order: z.number(),
     location: z.string().optional(),
+    cover: z.string().optional(),
   }),
 });
 
