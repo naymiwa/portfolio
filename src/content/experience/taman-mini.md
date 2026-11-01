@@ -1,7 +1,7 @@
 ---
 org: 'Taman Mini Indonesia Indah'
 role: 'Content Creator, Telescope Guide'
-date: 'May 2024 - Jul 2024 · 3 mos'
+date: '3 months'
 order: 40
 location: 'Freelance'
 locationUrl: 'https://www.youtube.com/@TukoSkyworld1/featured'
