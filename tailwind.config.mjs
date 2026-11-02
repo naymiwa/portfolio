@@ -47,6 +47,10 @@ export default {
           muted: '#5b6270',
           faint: '#8a909c',
         },
+        whatsapp: {
+          DEFAULT: '#2fa361',
+          dark: '#268b52',
+        },
         surface: {
           DEFAULT: '#ffffff',
           alt: '#f5f6f8',

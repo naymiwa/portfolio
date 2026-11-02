@@ -48,7 +48,7 @@
   }
 
   .section {
-    @apply py-20 sm:py-28 scroll-mt-24;
+    @apply py-12 sm:py-16 scroll-mt-20;
   }
 
   .eyebrow {
@@ -119,55 +119,8 @@
   transform: none;
 }
 
-/* ── Custom cursor (desktop, pointer only) ───────────────── */
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  border-radius: 999px;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.cursor-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--brand);
-}
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid rgba(57, 108, 218, 0.55);
-  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease,
-    background-color 0.25s ease, opacity 0.3s ease;
-}
-.cursor-ring.is-hovering {
-  width: 54px;
-  height: 54px;
-  border-color: rgba(217, 85, 74, 0.6);
-  background: rgba(217, 85, 74, 0.08);
-}
-body.cursor-ready.has-fine-pointer {
-  cursor: none;
-}
-body.cursor-ready.has-fine-pointer a,
-body.cursor-ready.has-fine-pointer button {
-  cursor: none;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none !important; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .cursor-dot, .cursor-ring { display: none !important; }
-  body.cursor-ready.has-fine-pointer,
-  body.cursor-ready.has-fine-pointer a,
-  body.cursor-ready.has-fine-pointer button { cursor: auto !important; }
   .animate-float, .animate-blob-drift, .animate-marquee { animation: none !important; }
 }
