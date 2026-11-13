@@ -61,6 +61,17 @@ export const site = {
     github: 'https://github.com/naymiwa',
   },
 
+  // Background music (floating player, bottom-right).
+  // Drop your audio file into /public/audio/ and point `src` at it.
+  music: {
+    enabled: true,
+    src: '/audio/amaze-life-on-erid.mp3',
+    title: 'Amaze (Life on Erid)',
+    artist: 'Project Hail Mary — Original Motion Picture Score',
+    // 0 = silent, 1 = full volume. Keep it low so it stays background.
+    volume: 0.3,
+  },
+
   // Project filter categories (must match `category` in project files).
   projectCategories: ['All', 'Web', 'UI/UX', 'Hardware', 'Creative', 'ML'],
 
