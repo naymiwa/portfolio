@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site } from '../data/site';
 import Icon from '../components/Icon.astro';
+import MusicPlayer from '../components/MusicPlayer.astro';
 
 interface Props {
   title?: string;
@@ -50,6 +51,8 @@ const ogImage = new URL('/og-image.svg', Astro.site);
     </a>
 
     <slot />
+
+    <MusicPlayer />
 
     <!-- Lightbox (full-size image preview, opened via [data-lightbox] triggers) -->
     <div
