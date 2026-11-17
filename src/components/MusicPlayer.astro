@@ -1,0 +1,158 @@
+---
+// Floating background-music player (bottom-right pill).
+// Audio file lives in /public/audio/ — see `site.music` in src/data/site.ts.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+const m = site.music;
+const label = m.artist ? `${m.title} — ${m.artist}` : m.title;
+---
+
+{m.enabled && (
+  <div
+    data-music-player
+    data-src={m.src}
+    data-volume={m.volume}
+    class="fixed bottom-5 right-5 z-40 hidden items-center gap-2 rounded-full border border-ink/10 bg-white/90 py-2 pl-2 pr-4 shadow-card backdrop-blur-sm sm:bottom-6 sm:right-6"
+  >
+    <button
+      type="button"
+      data-music-toggle
+      aria-label={`Play background music: ${label}`}
+      aria-pressed="false"
+      class="group relative grid h-10 w-10 place-items-center rounded-full bg-brand-500 text-white transition-colors hover:bg-brand-600"
+    >
+      <Icon name="play" class="h-4 w-4 translate-x-[1px]" data-music-icon-play />
+      <Icon name="pause" class="hidden h-4 w-4" data-music-icon-pause />
+    </button>
+
+    <div class="flex min-w-0 flex-col">
+      <span class="truncate text-xs font-semibold text-ink">{m.title}</span>
+      <span class="truncate text-[10px] text-ink-muted">{m.artist}</span>
+    </div>
+
+    {/* Equalizer bars — animated only while playing */}
+    <div data-music-eq class="flex h-4 items-end gap-[3px]" aria-hidden="true">
+      <span class="eq-bar h-1.5 w-[3px] rounded-full bg-brand-500"></span>
+      <span class="eq-bar h-3 w-[3px] rounded-full bg-brand-500"></span>
+      <span class="eq-bar h-2 w-[3px] rounded-full bg-brand-500"></span>
+      <span class="eq-bar h-4 w-[3px] rounded-full bg-brand-500"></span>
+    </div>
+  </div>
+)}
+
+<script>
+  // ── Background music ─────────────────────────────────────
+  // Browsers block autoplay with sound, so playback starts on the
+  // first user gesture (click/keydown) unless the visitor muted it
+  // before (remembered via localStorage). The pill hides itself if
+  // the audio file is missing (e.g. not added yet).
+  const root = document.querySelector<HTMLElement>('[data-music-player]');
+  if (root) {
+    const src = root.dataset.src || '';
+    const volume = Number(root.dataset.volume ?? '0.3');
+    const STORAGE_KEY = 'portfolio-music-muted';
+
+    const audio = new Audio(src);
+    audio.loop = true;
+    audio.volume = Number.isFinite(volume) ? Math.min(Math.max(volume, 0), 1) : 0.3;
+    audio.preload = 'auto';
+
+    const toggle = root.querySelector<HTMLButtonElement>('[data-music-toggle]');
+    const iconPlay = root.querySelector('[data-music-icon-play]');
+    const iconPause = root.querySelector('[data-music-icon-pause]');
+    const eq = root.querySelector<HTMLElement>('[data-music-eq]');
+
+    let userMuted = localStorage.getItem(STORAGE_KEY) === 'true';
+    let started = false;
+
+    const setPlayingUI = (playing: boolean) => {
+      iconPlay?.classList.toggle('hidden', playing);
+      iconPause?.classList.toggle('hidden', !playing);
+      eq?.classList.toggle('is-playing', playing);
+      toggle?.setAttribute('aria-pressed', String(playing));
+    };
+
+    const play = async () => {
+      try {
+        await audio.play();
+        started = true;
+        setPlayingUI(true);
+      } catch {
+        setPlayingUI(false);
+      }
+    };
+
+    const pause = () => {
+      audio.pause();
+      setPlayingUI(false);
+    };
+
+    // Hide the pill entirely if the file can't be loaded.
+    audio.addEventListener('error', () => {
+      root.classList.add('hidden');
+      root.classList.remove('flex');
+    });
+
+    // Reveal pill once the file is known to exist.
+    audio.addEventListener('canplaythrough', () => {
+      root.classList.remove('hidden');
+      root.classList.add('flex');
+    }, { once: true });
+    // Fallback reveal for cached/quick loads.
+    if (audio.readyState >= 3) {
+      root.classList.remove('hidden');
+      root.classList.add('flex');
+    }
+
+    toggle?.addEventListener('click', () => {
+      if (audio.paused) {
+        userMuted = false;
+        localStorage.setItem(STORAGE_KEY, 'false');
+        play();
+      } else {
+        userMuted = true;
+        localStorage.setItem(STORAGE_KEY, 'true');
+        pause();
+      }
+    });
+
+    // Start on first gesture unless the visitor muted music before.
+    const startOnGesture = () => {
+      if (started || userMuted) return;
+      play();
+    };
+    window.addEventListener('click', startOnGesture, { once: true });
+    window.addEventListener('keydown', startOnGesture, { once: true });
+
+    // Keep UI in sync if playback ends/starts externally.
+    audio.addEventListener('play', () => setPlayingUI(true));
+    audio.addEventListener('pause', () => setPlayingUI(false));
+  }
+</script>
+
+<style>
+  .eq-bar {
+    transform-origin: bottom;
+    animation: eq-bounce 0.9s ease-in-out infinite;
+    animation-play-state: paused;
+    opacity: 0.45;
+  }
+  [data-music-eq].is-playing .eq-bar {
+    animation-play-state: running;
+    opacity: 1;
+  }
+  .eq-bar:nth-child(1) { animation-delay: 0s; }
+  .eq-bar:nth-child(2) { animation-delay: 0.18s; }
+  .eq-bar:nth-child(3) { animation-delay: 0.36s; }
+  .eq-bar:nth-child(4) { animation-delay: 0.54s; }
+
+  @keyframes eq-bounce {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eq-bar { animation: none; }
+  }
+</style>
