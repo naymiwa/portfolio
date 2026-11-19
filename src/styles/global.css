@@ -124,3 +124,50 @@
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   .animate-float, .animate-blob-drift, .animate-marquee { animation: none !important; }
 }
+
+/* ── ID card hover peek (profile avatar) ───────────────────
+   A small preview card that fades in above the avatar on
+   hover/focus, with a glossy "shine" sweep like a plastic ID
+   card catching the light. Clicking the avatar still opens
+   the full-size lightbox. */
+.id-card-peek {
+  transform: translate(-50%, 6px) scale(0.94) rotate(-2deg);
+}
+.id-card-trigger:hover ~ .id-card-peek,
+.id-card-trigger:focus-visible ~ .id-card-peek,
+.id-card-peek:hover {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1) rotate(0deg);
+  pointer-events: auto;
+}
+
+.id-card-shine {
+  position: relative;
+  isolation: isolate;
+}
+.id-card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.85) 48%,
+    rgba(255, 255, 255, 0.15) 56%,
+    transparent 75%
+  );
+  transform: translateX(-130%);
+  animation: id-card-shine-sweep 3.2s ease-in-out infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@keyframes id-card-shine-sweep {
+  0%, 15% { transform: translateX(-130%); }
+  55%, 100% { transform: translateX(130%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .id-card-shine::after { animation: none !important; }
+}

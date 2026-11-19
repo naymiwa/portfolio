@@ -68,7 +68,9 @@ const ogImage = new URL('/og-image.svg', Astro.site);
         <Icon name="close" class="h-5 w-5" />
       </button>
       <figure class="max-h-[90vh] max-w-[90vw]">
-        <img data-lightbox-img src="" alt="" class="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl" />
+        <span data-lightbox-frame class="block overflow-hidden rounded-xl">
+          <img data-lightbox-img src="" alt="" class="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl" />
+        </span>
         <figcaption data-lightbox-caption class="mt-3 text-center text-sm text-white/80"></figcaption>
       </figure>
     </div>
@@ -179,11 +181,18 @@ const ogImage = new URL('/og-image.svg', Astro.site);
       const modal = document.querySelector('[data-lightbox-modal]');
       const modalImg = document.querySelector('[data-lightbox-img]');
       const modalCap = document.querySelector('[data-lightbox-caption]');
+      const modalFrame = document.querySelector('[data-lightbox-frame]');
       document.querySelectorAll('[data-lightbox]').forEach((btn) => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          // Prevent a default action bubbling up (e.g. an ancestor <a href="#home">
+          // wrapping an avatar trigger) from firing alongside the lightbox.
+          e.preventDefault();
           if (!modal || !modalImg) return;
-          modalImg.setAttribute('src', btn.getAttribute('data-src') || '');
+          const src = btn.getAttribute('data-src') || '';
+          modalImg.setAttribute('src', src);
           if (modalCap) modalCap.textContent = btn.getAttribute('data-caption') || '';
+          // Give the ID card its signature glossy shine when previewed full-size.
+          modalFrame?.classList.toggle('id-card-shine', src.includes('id-card-portfolio'));
           modal.classList.remove('hidden');
           modal.classList.add('flex');
           document.body.style.overflow = 'hidden';
