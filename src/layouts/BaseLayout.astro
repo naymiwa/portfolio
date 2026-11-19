@@ -203,6 +203,30 @@ const ogImage = new URL('/og-image.svg', Astro.site);
         modal?.classList.remove('flex');
         document.body.style.overflow = '';
       };
+
+      // ── Holographic card glare (cursor-tracking) ───────────
+      // Moves a glare/sheen to follow the pointer over any .id-card-shine
+      // element, with a subtle tilt, like light sweeping across a foil card.
+      const wireCardGlare = (el) => {
+        if (!el) return;
+        el.addEventListener('pointermove', (e) => {
+          const rect = el.getBoundingClientRect();
+          const px = ((e.clientX - rect.left) / rect.width) * 100;
+          const py = ((e.clientY - rect.top) / rect.height) * 100;
+          el.style.setProperty('--glare-x', `${px}%`);
+          el.style.setProperty('--glare-y', `${py}%`);
+          el.style.setProperty('--glare-opacity', '1');
+          el.style.setProperty('--tilt-x', `${((py - 50) / 50) * -7}deg`);
+          el.style.setProperty('--tilt-y', `${((px - 50) / 50) * 7}deg`);
+        });
+        el.addEventListener('pointerleave', () => {
+          el.style.setProperty('--glare-opacity', '0');
+          el.style.setProperty('--tilt-x', '0deg');
+          el.style.setProperty('--tilt-y', '0deg');
+        });
+      };
+      document.querySelectorAll('.id-card-shine').forEach(wireCardGlare);
+      wireCardGlare(modalFrame);
       document.querySelector('[data-lightbox-close]')?.addEventListener('click', closeLightbox);
       modal?.addEventListener('click', (e) => {
         if (e.target === modal) closeLightbox();

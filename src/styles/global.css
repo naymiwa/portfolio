@@ -141,33 +141,52 @@
   pointer-events: auto;
 }
 
+/* Holographic card glare: a highlight + faint rainbow sheen that tracks
+   the cursor (via --glare-x/--glare-y/--glare-opacity, set in JS) plus a
+   subtle 3D tilt (--tilt-x/--tilt-y), like a foil trading-card. */
 .id-card-shine {
   position: relative;
   isolation: isolate;
+  --glare-x: 50%;
+  --glare-y: 50%;
+  --glare-opacity: 0;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(700px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.25s ease-out;
+  will-change: transform;
 }
 .id-card-shine::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    115deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.85) 48%,
-    rgba(255, 255, 255, 0.15) 56%,
-    transparent 75%
-  );
-  transform: translateX(-130%);
-  animation: id-card-shine-sweep 3.2s ease-in-out infinite;
-  mix-blend-mode: overlay;
   pointer-events: none;
-}
-
-@keyframes id-card-shine-sweep {
-  0%, 15% { transform: translateX(-130%); }
-  55%, 100% { transform: translateX(130%); }
+  background:
+    radial-gradient(
+      circle at var(--glare-x) var(--glare-y),
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.35) 22%,
+      transparent 55%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 35%,
+      rgba(140, 180, 255, 0.35) 45%,
+      rgba(255, 170, 230, 0.35) 52%,
+      rgba(255, 235, 150, 0.3) 60%,
+      transparent 70%
+    );
+  background-blend-mode: screen;
+  mix-blend-mode: overlay;
+  opacity: var(--glare-opacity);
+  transition: opacity 0.35s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .id-card-shine::after { animation: none !important; }
+  .id-card-shine {
+    transform: none !important;
+    transition: none !important;
+  }
+  .id-card-shine::after { transition: none !important; opacity: 0 !important; }
 }
