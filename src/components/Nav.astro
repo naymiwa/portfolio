@@ -13,19 +13,40 @@ import Icon from './Icon.astro';
       data-nav-bar
     >
       <a href="#home" class="group flex items-center gap-2.5" aria-label="Home">
-        <span
-          class="grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-brand-500 font-display text-sm font-bold text-white transition-transform duration-300 group-hover:scale-105"
-        >
-          {site.avatar ? (
-            <img
-              src={site.avatar}
-              alt={site.name}
-              class="h-full w-full object-cover"
-              onerror={`this.remove()`}
-            />
-          ) : (
-            site.monogram
-          )}
+        <span class="relative">
+          <button
+            type="button"
+            data-lightbox
+            data-src="/images/id-card-portfolio.png"
+            data-caption={`${site.name} — ID Card`}
+            aria-label="View ID card"
+            class="id-card-trigger grid h-9 w-9 cursor-pointer place-items-center overflow-hidden rounded-full bg-brand-500 font-display text-sm font-bold text-white transition-transform duration-300 group-hover:scale-105"
+          >
+            {site.avatar ? (
+              <img
+                src={site.avatar}
+                alt={site.name}
+                class="h-full w-full object-cover"
+                onerror={`this.remove()`}
+              />
+            ) : (
+              site.monogram
+            )}
+          </button>
+
+          <!-- Hover peek: mini ID card preview shown above the avatar -->
+          <span
+            class="id-card-peek pointer-events-none absolute left-1/2 top-full z-50 mt-2 w-44 opacity-0 transition-all duration-300 ease-out"
+          >
+            <span class="id-card-shine block overflow-hidden rounded-xl border-2 border-white shadow-2xl">
+              <img
+                src="/images/id-card-portfolio.png"
+                alt={`${site.name}'s ID card`}
+                loading="lazy"
+                class="block w-full"
+              />
+            </span>
+          </span>
         </span>
         <span class="hidden font-display text-sm font-semibold text-ink sm:block"
           >{site.name}</span

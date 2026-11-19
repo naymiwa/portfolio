@@ -124,3 +124,69 @@
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   .animate-float, .animate-blob-drift, .animate-marquee { animation: none !important; }
 }
+
+/* ── ID card hover peek (profile avatar) ───────────────────
+   A small preview card that fades in above the avatar on
+   hover/focus, with a glossy "shine" sweep like a plastic ID
+   card catching the light. Clicking the avatar still opens
+   the full-size lightbox. */
+.id-card-peek {
+  transform: translate(-50%, 6px) scale(0.94) rotate(-2deg);
+}
+.id-card-trigger:hover ~ .id-card-peek,
+.id-card-trigger:focus-visible ~ .id-card-peek,
+.id-card-peek:hover {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1) rotate(0deg);
+  pointer-events: auto;
+}
+
+/* Holographic card glare: a highlight + faint rainbow sheen that tracks
+   the cursor (via --glare-x/--glare-y/--glare-opacity, set in JS) plus a
+   subtle 3D tilt (--tilt-x/--tilt-y), like a foil trading-card. */
+.id-card-shine {
+  position: relative;
+  isolation: isolate;
+  --glare-x: 50%;
+  --glare-y: 50%;
+  --glare-opacity: 0;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(700px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.25s ease-out;
+  will-change: transform;
+}
+.id-card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at var(--glare-x) var(--glare-y),
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.35) 22%,
+      transparent 55%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 35%,
+      rgba(140, 180, 255, 0.35) 45%,
+      rgba(255, 170, 230, 0.35) 52%,
+      rgba(255, 235, 150, 0.3) 60%,
+      transparent 70%
+    );
+  background-blend-mode: screen;
+  mix-blend-mode: overlay;
+  opacity: var(--glare-opacity);
+  transition: opacity 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .id-card-shine {
+    transform: none !important;
+    transition: none !important;
+  }
+  .id-card-shine::after { transition: none !important; opacity: 0 !important; }
+}
