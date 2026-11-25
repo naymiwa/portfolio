@@ -1,6 +1,6 @@
 ---
 title: 'SWARA: NASA Hackaton 2026'
-description: 'A web platform that turns NASA SPHEREx infrared sky survey data into an interactive sky explorer with time-series comparison and data sonification.'
+description: 'A web platform that turns NASA SPHEREx infrared sky survey data into an interactive sky explorer with time-series comparison and data sonification. Selected as a Jakarta Global Nominee.'
 category: 'Web'
 date: '2026'
 order: 120
