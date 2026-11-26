@@ -43,7 +43,7 @@ const year = new Date().getFullYear();
       <div class="flex gap-2">
         {socialList.map((s) => (
           <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name}
-            class:list={['grid h-10 w-10 place-items-center rounded-full border border-ink/10 bg-white text-ink-muted transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-600', s.color]}>
+            class:list={['grid h-10 w-10 place-items-center rounded-full border border-ink/10 bg-surface text-ink-muted transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-600', s.color]}>
             <Icon name={s.name} class="h-5 w-5" />
           </a>
         ))}
@@ -52,7 +52,7 @@ const year = new Date().getFullYear();
 
     <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-ink/[0.06] pt-6 text-xs text-ink-faint sm:flex-row">
       <p>© {year} {site.name}. All rights reserved.</p>
-      <button type="button" data-back-to-top class="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white px-3 py-1.5 font-medium text-ink-muted transition-colors hover:text-brand-600">
+      <button type="button" data-back-to-top class="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-surface px-3 py-1.5 font-medium text-ink-muted transition-colors hover:text-brand-600">
         Back to top <Icon name="arrowUpRight" class="h-3.5 w-3.5" />
       </button>
     </div>
