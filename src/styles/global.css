@@ -7,6 +7,55 @@
     --brand: #396cda;
     --coral: #d9554a;
     --sand: #f1cc87;
+
+    /* Semantic tokens as "R G B" triplets so Tailwind's <alpha-value>
+       opacity modifiers (e.g. bg-surface/90, border-ink/10) keep working.
+       Light theme values: */
+    --ink: 22 24 29;
+    --ink-soft: 42 46 55;
+    --ink-muted: 91 98 112;
+    --ink-faint: 138 144 156;
+
+    --surface: 255 255 255;
+    --surface-alt: 245 246 248;
+    --surface-sunken: 238 240 244;
+
+    --brand-50: 238 243 252;
+    --brand-100: 215 227 248;
+    --brand-600: 47 87 176;
+
+    --coral-50: 251 238 237;
+    --coral-100: 246 214 211;
+    --coral-600: 184 68 59;
+
+    --sand-100: 251 241 217;
+    --sand-200: 247 227 180;
+    --sand-700: 169 121 31;
+  }
+
+  /* Dark theme — a soft navy, not pitch black, with tinted badge colors
+     re-balanced for contrast against it. Toggled via .dark on <html>. */
+  .dark {
+    --ink: 236 241 248;
+    --ink-soft: 213 222 236;
+    --ink-muted: 158 171 194;
+    --ink-faint: 112 126 150;
+
+    --surface: 19 30 51;
+    --surface-alt: 27 42 68;
+    --surface-sunken: 13 21 36;
+
+    --brand-50: 24 38 64;
+    --brand-100: 36 56 92;
+    --brand-600: 137 170 234;
+
+    --coral-50: 52 33 32;
+    --coral-100: 70 42 40;
+    --coral-600: 229 131 122;
+
+    --sand-100: 58 47 28;
+    --sand-200: 77 62 36;
+    --sand-700: 244 215 155;
   }
 
   html {
@@ -17,12 +66,17 @@
   }
 
   body {
-    @apply bg-surface text-ink font-sans antialiased;
+    @apply bg-surface text-ink font-sans antialiased transition-colors duration-300;
   }
 
   ::selection {
     background: rgba(57, 108, 218, 0.18);
     color: #16181d;
+  }
+
+  .dark ::selection {
+    background: rgba(137, 170, 234, 0.3);
+    color: #ecf1f8;
   }
 
   h1, h2, h3, h4 {
@@ -39,6 +93,12 @@
     background: #c3cee6;
     border-radius: 999px;
     border: 3px solid #fff;
+  }
+
+  .dark * { scrollbar-color: #2c3b57 transparent; }
+  .dark *::-webkit-scrollbar-thumb {
+    background: #2c3b57;
+    border-color: #131e33;
   }
 }
 
@@ -65,15 +125,15 @@
     @apply btn bg-coral-500 text-white shadow-card hover:bg-coral-600 hover:-translate-y-0.5;
   }
   .btn-ghost {
-    @apply btn border border-ink/10 bg-white text-ink hover:border-brand-300 hover:text-brand-600 hover:-translate-y-0.5;
+    @apply btn border border-ink/10 bg-surface text-ink hover:border-brand-300 hover:text-brand-600 hover:-translate-y-0.5;
   }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-ink/10 bg-white px-3 py-1 text-xs font-medium text-ink-muted;
+    @apply inline-flex items-center rounded-full border border-ink/10 bg-surface px-3 py-1 text-xs font-medium text-ink-muted;
   }
 
   .card {
-    @apply rounded-2xl border border-ink/[0.06] bg-white shadow-card transition-all duration-300;
+    @apply rounded-2xl border border-ink/[0.06] bg-surface shadow-card transition-all duration-300;
   }
 
   .link-underline {
