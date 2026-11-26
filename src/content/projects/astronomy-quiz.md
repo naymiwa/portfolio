@@ -4,7 +4,7 @@ description: 'Crafted a prototype astronomy quiz application using Thunkable, an
 category: 'UI/UX'
 date: '2023'
 order: 80
-cover: '/images/projects/quiz-app.jpg'
+cover: '/images/projects/quiz-app-cover.png'
 tags: ['Thunkable', 'No-code', 'Mobile']
 ---
 
