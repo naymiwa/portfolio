@@ -26,9 +26,11 @@ const ogImage = new URL('/og-image.svg', Astro.site);
     <script is:inline>
       (function () {
         try {
+          // Always light by default — dark mode only applies once the
+          // visitor has explicitly chosen it via the toggle (remembered
+          // in localStorage). We don't follow the OS preference here.
           var stored = localStorage.getItem('theme');
-          var dark = stored === 'dark' || (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.classList.toggle('dark', stored === 'dark');
         } catch (e) {}
       })();
     </script>
